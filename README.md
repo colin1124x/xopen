@@ -3,6 +3,10 @@ xopen
 
 實驗性質的半業務邏輯綁定另開視窗
 
+bower
+-----
+    bower install colin-xopen
+
 config schema
 -------------
     // before load xopen.js
@@ -16,8 +20,19 @@ config schema
             scrollbars: 0
         }
     }
-    
-    
-bower
------
-    bower install colin-xopen
+
+html
+----
+### 方法1
+    <script src="xopen.js"></script>
+    <button onclick="xopen.open()">click me</button>
+
+### 方法2
+    <button id="i-am-a-button">click me</button>
+    <script src="xopen.js"></script>
+    <script>
+        document.getElementById('i-am-a-button').addEventListener('click', function(){
+            xopen.open();
+        });
+    </script>
+
