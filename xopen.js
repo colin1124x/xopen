@@ -83,6 +83,9 @@
     return {
         init: true,
 
+        config: function(conf){
+            return default_config = merge(default_config, conf);
+        },
         compile: function(other){
 
             var conf = merge({}, default_config, config, other),
@@ -95,7 +98,9 @@
                 throw new Error('please set url');
             }
 
-            url += /\?.+/.test(url) ? '&'+query_string : '?'+query_string;
+            if (query_string) {
+                url += /\?.+/.test(url) ? '&'+query_string : '?'+query_string;
+            }
 
             return [url, name, window_setting];
         },

@@ -25,7 +25,7 @@ init schema
 API
 ---
     // options 結構同上
-    xopen.compile([options])
+    xopen.config([options])
     xopen.open([options])
 
 html
