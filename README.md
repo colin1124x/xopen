@@ -7,9 +7,10 @@ bower
 -----
     bower install colin-xopen
 
-config schema
+init schema
 -------------
     // before load xopen.js
+    // 所有設定值皆可省略,但url至少需在 1. init schema 2. api open 提供
     var xopen = {
         name: 'window_name',
         url: 'http://user.window.url',
@@ -21,13 +22,19 @@ config schema
         }
     }
 
+API
+---
+    // options 結構同上
+    xopen.compile([options])
+    xopen.open([options])
+
 html
 ----
-### 方法1
+方法1
     <script src="xopen.js"></script>
     <button onclick="xopen.open()">click me</button>
 
-### 方法2
+方法2
     <button id="i-am-a-button">click me</button>
     <script src="xopen.js"></script>
     <script>

@@ -1,14 +1,14 @@
 (function(factory){
 
     if ( ! self.xopen || ! self.xopen.init) {
-        self.xopen = factory();
+        self.xopen = factory(self.xopen || {});
     }
 
-})(function(){ 'use strict';
+})(function(config){ 'use strict';
 
     var obj = {},
         _toString = obj.toString,
-        config = {
+        default_config = {
             name: 'opener_'+(new Date).getTime(),
             url: null,
             params: {},
@@ -45,19 +45,26 @@
                 }
             }
         },
-        merge = function(o1, o2){
-            each(o2, function(k, v){
-                var type2 = typeof v,
-                    type1 = typeof o1[k];
-                if ('object' == type2) {
-                    if (type1 == 'undefined') {
-                        o1[k] = {};
+        merge = function(o){
+            var args = arguments,
+                oo;
+            for (var i = 1, L = args.length; i < L; ++i) {
+                oo = args[i];
+                oo && each(oo, function(k, v){
+                    var type2 = typeof v,
+                        type1 = typeof o[k];
+                    if ('object' == type2) {
+                        if (type1 == 'undefined') {
+                            o[k] = {};
+                        }
+                        merge(o[k], oo[k]);
+                    } else {
+                        o[k] = oo[k];
                     }
-                    merge(o1[k], o2[k]);
-                } else {
-                    o1[k] = o2[k];
-                }
-            });
+                });
+            }
+
+            return o;
         },
         join = function(o, s1, s2){
             var collector = [];
@@ -73,24 +80,16 @@
             return join(o, '=', ', ');
         };
 
-    merge(config, self.xopen || {});
-
     return {
         init: true,
 
-        config: function(name, value){
-            if (typeof value != 'undefined') {
-                config[name] = value;
-            }
+        compile: function(other){
 
-            return config[name];
-        },
-
-        compile: function(){
-            var name = this.config('name'),
-                url = this.config('url'),
-                query_string = build_query(this.config('params') || {}),
-                window_setting = build_setting(this.config('window') || {});
+            var conf = merge({}, default_config, config, other),
+                name = conf.name,
+                url = conf.url,
+                query_string = build_query(conf.params || {}),
+                window_setting = build_setting(conf.window || {});
 
             if ( ! url) {
                 throw new Error('please set url');
@@ -100,8 +99,8 @@
 
             return [url, name, window_setting];
         },
-        open: function(){
-            return window.open.apply(window, this.compile());
+        open: function(other){
+            return window.open.apply(window, this.compile(other));
         }
     };
 });
