@@ -1,0 +1,13 @@
+{
+  "name": "xopen",
+  "version": "0.0.1",
+  "authors": [
+    "Colin <colin1124x@gmail.com>"
+  ],
+  "description": "另開視窗",
+  "main": "xopen.js",
+  "keywords": [
+    "window open"
+  ],
+  "license": "MIT"
+}
