@@ -31,10 +31,12 @@ API
 html
 ----
 方法1
+
     <script src="xopen.js"></script>
     <button onclick="xopen.open()">click me</button>
 
 方法2
+
     <button id="i-am-a-button">click me</button>
     <script src="xopen.js"></script>
     <script>
