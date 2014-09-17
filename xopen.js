@@ -1,10 +1,6 @@
 (function(factory){
 
-    if (typeof module == 'object' && module && typeof module.exports == 'object') {
-        module.exports = factory();
-    } else if (typeof define != 'undefined' && define.amd) {
-        define('xopen', [], factory);
-    } else {
+    if ( ! self.xopen || ! self.xopen.init) {
         self.xopen = factory();
     }
 
@@ -80,6 +76,8 @@
     merge(config, self.xopen || {});
 
     return {
+        init: true,
+
         config: function(name, value){
             if (typeof value != 'undefined') {
                 config[name] = value;
