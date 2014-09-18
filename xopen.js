@@ -13,8 +13,8 @@
             url: null,
             params: {},
             window: {
-                width: 900,
-                height: 510,
+                width: 920,
+                height: 570,
                 fullscreen: 0,
                 location: 0,
                 menubar: 0,
@@ -82,7 +82,7 @@
 
     return {
         init: true,
-
+        version: '1.0.1',
         config: function(conf){
             return default_config = merge(default_config, conf);
         },
