@@ -5,7 +5,11 @@ xopen
 
 bower
 -----
-    bower install colin-xopen
+    bower install --save colin-xopen#~1
+
+    // or
+
+    bower install --save rde-xopen#~1
 
 init schema
 -------------
