@@ -92,7 +92,7 @@
                 name = conf.name,
                 url = conf.url,
                 query_string = build_query(conf.params || {}),
-                window_setting = build_setting(conf.window || {});
+                params_string = build_setting(conf.window || {});
 
             if ( ! url) {
                 throw new Error('please set url');
@@ -102,10 +102,16 @@
                 url += /\?.+/.test(url) ? '&'+query_string : '?'+query_string;
             }
 
-            return [url, name, window_setting];
+            return {
+                url: url,
+                name: name,
+                params_string: params_string
+            };
         },
         open: function(other){
-            return window.open.apply(window, this.compile(other));
+            var args = this.compile(other);
+
+            return window.open(args.url, args.name, args.params_string);
         }
     };
 });
