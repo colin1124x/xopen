@@ -14,7 +14,7 @@
             params: {},
             window: {
                 width: 920,
-                height: 570,
+                height: 620,
                 fullscreen: 0,
                 location: 0,
                 menubar: 0,
